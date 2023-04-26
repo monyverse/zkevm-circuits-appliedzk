@@ -191,7 +191,7 @@ impl<F: Field> TxCircuit<F> {
                     0,
                     TxFieldTag::Null,
                     0,
-                    Value::known(F::zero()),
+                    Value::known(F::ZERO),
                 )?;
                 offset += 1;
                 // Assign al Tx fields except for call data
@@ -305,7 +305,7 @@ impl<F: Field> TxCircuit<F> {
                         0, // tx_id
                         TxFieldTag::CallData,
                         0,
-                        Value::known(F::zero()),
+                        Value::known(F::ZERO),
                     )?;
                     offset += 1;
                 }
