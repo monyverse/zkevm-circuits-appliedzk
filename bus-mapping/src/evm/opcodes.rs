@@ -406,18 +406,11 @@ pub fn gen_begin_tx_ops(state: &mut CircuitInputStateRef) -> Result<ExecStep, Er
         )?;
     }
 
-    // Calculate intrinsic gas cost
-    let call_data_gas_cost = state
-        .tx
-        .tx
-        .call_data
-        .iter()
-        .fold(0, |acc, byte| acc + if *byte == 0 { 4 } else { 16 });
     let intrinsic_gas_cost = if state.tx.is_create() {
         GasCost::CREATION_TX.as_u64()
     } else {
         GasCost::TX.as_u64()
-    } + call_data_gas_cost;
+    } + state.tx.tx.call_data_gas_cost();
     exec_step.gas_cost = GasCost(intrinsic_gas_cost);
 
     // Get code_hash of callee
