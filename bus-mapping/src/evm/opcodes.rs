@@ -502,7 +502,7 @@ pub fn gen_begin_tx_ops(state: &mut CircuitInputStateRef) -> Result<ExecStep, Er
                 ),
                 (
                     CallContextField::CallDataLength,
-                    state.tx.tx.call_data.len().into(),
+                    call.call_data_length.into(),
                 ),
                 (CallContextField::Value, call.value),
                 (CallContextField::IsStatic, (call.is_static as usize).into()),
